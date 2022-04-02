@@ -12,6 +12,12 @@ struct Home: View {
     @State var currentIndex: Int = 0
     @State var currentTab: String = "Films"
     
+    // MARK: Detail View Properties
+    @State var detailMoview: Movie?
+    @State var showDetailView: Bool = false
+    // FOR MATCHED GEOMETRY EFFECT STORING CURRENT CARD SIZE
+    @State var currentCardSize: CGSize = .zero
+    
     // Enviroment Values
     @Namespace var animation
     @Environment(\.colorScheme) var scheme
@@ -36,6 +42,14 @@ struct Home: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: size.width, height: size.height)
                             .cornerRadius(15)
+                            .matchedGeometryEffect(id: movie.id, in: animation)
+                            .onTapGesture {
+                                currentCardSize = size
+                                detailMoview = movie
+                                withAnimation(.easeInOut) {
+                                    showDetailView = true
+                                }
+                            }
                     }
                 }
                 // Since Carousel is Moved the current Card a little bit up
@@ -44,6 +58,35 @@ struct Home: View {
                 
                 // Custom Indicator
                 CustomIndicator()
+                
+                HStack {
+                    Text("Popular")
+                        .font(.title3.bold())
+                    
+                    Spacer()
+                    
+                    Button("See More") {}
+                        .font(.system(size: 16, weight: .semibold))
+                }
+                .padding()
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(movies) { movie in
+                            Image(movie.artwork)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 120)
+                                .cornerRadius(15)
+                        }
+                    }
+                    .padding()
+                }
+            }
+            .overlay {
+                if let movie = detailMoview, showDetailView {
+                    DetailView(movie: movie, showDetailView: $showDetailView, detailMovie: $detailMoview, currentCardSize: $currentCardSize, animation: animation)
+                }
             }
         }
     }
@@ -79,7 +122,7 @@ struct Home: View {
                         .background{
                             if currentTab == tab {
                                 Capsule()
-                                    .fill(.ultraThinMaterial)
+                                    .fill(.regularMaterial)
                                     .environment(\.colorScheme, .dark)
                                     .matchedGeometryEffect(id: "TAB", in: animation)
                             }

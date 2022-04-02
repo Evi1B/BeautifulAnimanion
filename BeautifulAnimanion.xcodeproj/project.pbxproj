@@ -14,6 +14,8 @@
 		134CC6D127F85F7900E8130D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CC6D027F85F7900E8130D /* Movie.swift */; };
 		134CC6D327F860D900E8130D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CC6D227F860D900E8130D /* Home.swift */; };
 		134CC6D527F866ED00E8130D /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CC6D427F866ED00E8130D /* SnapCarousel.swift */; };
+		134CC6D727F888AA00E8130D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CC6D627F888AA00E8130D /* DetailView.swift */; };
+		134CC6D927F88EA200E8130D /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134CC6D827F88EA200E8130D /* OffsetModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		134CC6D027F85F7900E8130D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		134CC6D227F860D900E8130D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		134CC6D427F866ED00E8130D /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
+		134CC6D627F888AA00E8130D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		134CC6D827F88EA200E8130D /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 			children = (
 				134CC6D427F866ED00E8130D /* SnapCarousel.swift */,
 				134CC6D227F860D900E8130D /* Home.swift */,
+				134CC6D627F888AA00E8130D /* DetailView.swift */,
+				134CC6D827F88EA200E8130D /* OffsetModifier.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,7 +169,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				134CC6C327F85C9100E8130D /* ContentView.swift in Sources */,
+				134CC6D727F888AA00E8130D /* DetailView.swift in Sources */,
 				134CC6C127F85C9100E8130D /* BeautifulAnimanionApp.swift in Sources */,
+				134CC6D927F88EA200E8130D /* OffsetModifier.swift in Sources */,
 				134CC6D327F860D900E8130D /* Home.swift in Sources */,
 				134CC6D127F85F7900E8130D /* Movie.swift in Sources */,
 				134CC6D527F866ED00E8130D /* SnapCarousel.swift in Sources */,
