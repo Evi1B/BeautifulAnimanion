@@ -78,6 +78,7 @@
 		134CC6CE27F85F6000E8130D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				134CC6D427F866ED00E8130D /* SnapCarousel.swift */,
 				134CC6D227F860D900E8130D /* Home.swift */,
 			);
 			path = View;
@@ -87,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				134CC6D027F85F7900E8130D /* Movie.swift */,
-				134CC6D427F866ED00E8130D /* SnapCarousel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

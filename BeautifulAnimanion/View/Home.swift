@@ -21,7 +21,9 @@ struct Home: View {
             
             // MARK: Main View Content
             VStack {
-                // Check out the Snap Carousel Video
+                SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
+                    
+                }
                 
             }
         }
