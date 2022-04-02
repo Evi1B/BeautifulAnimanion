@@ -41,8 +41,24 @@ struct Home: View {
                 // Since Carousel is Moved the current Card a little bit up
                 // Using Padding to Avoid the Undercovering the top element
                 .padding(.top, 70)
+                
+                // Custom Indicator
+                CustomIndicator()
             }
         }
+    }
+    
+    // MARK: Custom Indicator
+    @ViewBuilder
+    func CustomIndicator() -> some View {
+        HStack(spacing: 5) {
+            ForEach(movies.indices, id: \.self) { index in
+                Circle()
+                    .fill(currentIndex == index ? .blue : .gray.opacity(0.5))
+                    .frame(width: currentIndex == index ? 10 : 6, height: currentIndex == index ? 10 : 6)
+            }
+        }
+        .animation(.easeInOut, value: currentIndex)
     }
     
     // MARK: Custom Nav Bar
@@ -84,7 +100,7 @@ struct Home: View {
             
             TabView(selection: $currentIndex) {
                 ForEach(movies.indices, id: \.self) { index in
-                    Image(movies[0].artwork)
+                    Image(movies[index].artwork)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size.width, height: size.height)
@@ -93,6 +109,8 @@ struct Home: View {
                     
                 }
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.easeInOut, value: currentIndex)
             
             let color: Color = (scheme == .dark ? .black : .white)
             // Custom Gradient
