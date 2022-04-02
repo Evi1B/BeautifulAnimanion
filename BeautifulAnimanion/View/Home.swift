@@ -10,8 +10,10 @@ import SwiftUI
 struct Home: View {
     // MARK: Animated View Properties
     @State var currentIndex: Int = 0
+    @State var currentTab: String = "Films"
     
     // Enviroment Values
+    @Namespace var animation
     @Environment(\.colorScheme) var scheme
     
     var body: some View {
@@ -21,12 +23,57 @@ struct Home: View {
             
             // MARK: Main View Content
             VStack {
+                // Custom Nav Bar
+                NavBar()
+                
                 SnapCarousel(spacing: 20, trailingSpace: 110, index: $currentIndex, items: movies) { movie in
                     
+                    GeometryReader { proxy in
+                        let size = proxy.size
+                        
+                        Image(movie.artwork)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                            .cornerRadius(15)
+                    }
                 }
+                // Since Carousel is Moved the current Card a little bit up
+                // Using Padding to Avoid the Undercovering the top element
+                .padding(.top, 70)
+            }
+        }
+    }
+    
+    // MARK: Custom Nav Bar
+    @ViewBuilder
+    func NavBar() -> some View {
+        HStack(spacing: 0) {
+            ForEach(["Films", "Localities"], id: \.self) { tab in
+                Button {
+                    withAnimation {
+                        currentTab = tab
+                    }
+                } label: {
+                    
+                    Text(tab)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 20)
+                        .background{
+                            if currentTab == tab {
+                                Capsule()
+                                    .fill(.ultraThinMaterial)
+                                    .environment(\.colorScheme, .dark)
+                                    .matchedGeometryEffect(id: "TAB", in: animation)
+                            }
+                        }
+                }
+
                 
             }
         }
+        .padding()
     }
     
     // MARK: Blurred BG

@@ -43,6 +43,7 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
                     
                     content(item)
                         .frame(width: proxy.size.width - trailingSpace)
+                        .offset(y: getOffset(item: item, width: width))
                 }
             }
             // Spacing will be horizontal padding...
@@ -95,7 +96,39 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
         }
         // Animating when offset = 0
         .animation(.easeInOut, value: offset == 0)
+    }
+    
+    // Moving View based on scroll Offset...
+    
+    func getOffset(item: T, width: CGFloat) ->  CGFloat {
         
+        // Progress...
+        // Shifting Current Item to Top
+        let progress = ((offset < 0 ? offset : -offset) / width) * 60
+        
+        // max 60...
+        // then again minus from 60....
+        let topOffset = -progress < 60 ? progress : -(progress + 120)
+        
+        let previous = getIndex(item: item) - 1 == currentIndex ? (offset < 0 ? topOffset : -topOffset) : 0
+        
+        let next = getIndex(item: item) + 1 == currentIndex ? (offset < 0 ? -topOffset : topOffset) : 0
+        
+        // saftey check between 0 to max list size....
+        let checkBetween = currentIndex >= 0 && currentIndex < list.count ? (getIndex(item: item) - 1 == currentIndex ? previous : next) : 0
+        
+        // checking current....
+        // if so shifting view to top....
+        return getIndex(item: item) == currentIndex ? -60 - topOffset : checkBetween
+    }
+    
+    // Fetching Index...
+    func getIndex(item: T) -> Int {
+        let index = list.firstIndex { currentItem in
+            return currentItem.id == item.id
+        } ?? 0
+        
+        return index
     }
     
 }
